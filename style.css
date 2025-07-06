@@ -1,0 +1,38 @@
+/* Smooth scrolling for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* A light background color for the body to make sections stand out */
+body {
+    background-color: #f7fafc; /* equiv to Tailwind's gray-100 */
+}
+
+/* Center the main content and give it a max-width for better readability on large screens */
+main {
+    max-width: 1024px; /* lg */
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Add vertical padding and a bottom border to each section for separation */
+section {
+    padding: 4rem 1rem; /* 64px top/bottom, 16px left/right */
+    border-bottom: 1px solid #e2e8f0; /* gray-200 */
+}
+
+/*
+ * Animation for project cards on scroll.
+ * The 'project-card-animate' class sets the initial state (hidden).
+ * The 'visible' class is added by JavaScript to trigger the animation.
+*/
+.project-card-animate {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.project-card-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
