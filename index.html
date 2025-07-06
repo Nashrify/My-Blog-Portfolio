@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mr. Alchemy's Blog Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            /* Tailwind's blue-50, for a lighter base */
+            color: #312e81;
+            /* Tailwind's indigo-900 */
+            margin: 0;
+        }
+
+        header {
+            margin-bottom: 2px;
+            position: fixed;
+            /* Keep header fixed */
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #4338ca;
+            /* Always visible background color (Indigo-700) */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            /* Always visible shadow */
+            transition: none;
+            /* No transition needed for scroll effects */
+            z-index: 1000;
+        }
+
+        /* Removed header.scrolled styles as header is now always solid */
+
+
+        /* Hamburger icon lines */
+        #menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: white;
+            border-radius: 2px;
+        }
+
+        /* Hamburger toggle to X animation */
+        #menu-toggle.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        #menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        #menu-toggle.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Menu slide down animation */
+        #main-menu-list {
+            transition: max-height 0.35s ease-in-out, opacity 0.35s ease-in-out;
+            overflow: hidden;
+        }
+
+        #main-menu-list.hidden {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #main-menu-list.visible {
+            max-height: 500px;
+            /* enough for menu */
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Animate sections */
+        .section-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .section-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Back to top button */
+        #back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background-color: #4338ca;
+            /* Indigo-700 */
+            color: white;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 10px rgba(76, 29, 149, 0.4);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            z-index: 1001;
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="text-white p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold tracking-tight md:mb-0">Mr. Alchemy's Blog Portfolio</h1>
+        <nav role="navigation" class="relative">
+            <ul id="main-menu-list" role="menu" aria-label="Main menu" class=" md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6
+                       bg-indigo-900    text-white md:bg-transparent rounded-md md:rounded-none p-6 md:p-0
+                       absolute md:static top-full right-0 md:w-auto w-48 shadow-lg md:shadow-none z-50">
+                <li role="menuitem"><a href="#home"
+                        class="block py-2 px-3 rounded hover:bg-indigo-700 transition">Home</a></li>
+                <li role="menuitem"><a href="#about"
+                        class="block py-2 px-3 rounded hover:bg-indigo-700 transition">About</a></li>
+                <li role="menuitem"><a href="#skills"
+                        class="block py-2 px-3 rounded hover:bg-indigo-700 transition">Skills</a></li>
+                <li role="menuitem"><a href="#projects"
+                        class="block py-2 px-3 rounded hover:bg-indigo-700 transition">Projects</a></li>
+                <li role="menuitem"><a href="#services"
+                        class="block py-2 px-3 rounded hover:bg-indigo-700 transition">Services</a></li>
+                <li role="menuitem"><a href="#blog"
+                        class="block py-2 px-3 rounded hover:bg-indigo-700 transition">Blog</a></li>
+                <li role="menuitem"><a href="#testimonials"
+                        class="block py-2 px-3 rounded hover:bg-indigo-700 transition">Testimonials</a></li>
+                <li role="menuitem"><a href="#mobile"
+                        class="block py-2 px-3 rounded hover:bg-indigo-700 transition">Mobile</a></li>
+                <li role="menuitem"><a href="#contact"
+                        class="block py-2 px-3 rounded hover:bg-indigo-700 transition">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="menu-toggle"
+            class="md:hidden flex flex-col justify-center items-center w-10 h-10 focus:outline-none"
+            aria-label="Toggle menu" aria-expanded="false" aria-controls="main-menu-list">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <main class="pt-20">
+        <section id="home" class="py-24 px-6 bg-indigo-100 section-animate text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-indigo-900">
+                Welcome to My Portfolio!
+            </h1>
+            <h2 class="text-5xl font-extrabold mb-6 leading-tight">Hello, I'm Mr. Alchemy 👋</h2>
+            <p class="text-xl max-w-3xl mx-auto mb-4 leading-relaxed text-indigo-900">
+                A passionate full-stack developer and educator based in Tanzania. I specialize in creating clean, modern
+                websites and systems that solve real problems.
+            </p>
+            <p class="text-indigo-600 font-semibold italic tracking-wide">“Code with clarity, design with purpose.”</p>
+        </section>
+        <section id="about" class="py-24 px-6 bg-indigo-50 section-animate text-center">
+            <h2 class="text-3xl font-bold text-center mb-8">About Me</h2>
+            <div class="text-lg space-y-6 text-indigo-800">
+                <p>I’m a self-driven web developer with a background in teaching biology and chemistry. Over the past
+                    year, I’ve transitioned into tech, building systems like student ID generators, education portals,
+                    and digital libraries.</p>
+                <p>My current focus is developing educational tools for Tanzanian schools, including e-library systems,
+                    school ID automation, and student information systems.</p>
+                <p>When I’m not coding, I enjoy mentoring, reading tech articles, and exploring creative design ideas.
+                </p>
+            </div>
+        </section>
+
+        <section id="skills"
+            class="py-24 px-6 bg-indigo-50 section-animate max-w-7xl mx-auto rounded-lg shadow-md mt-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">Skills &amp; Tools</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center text-indigo-900">
+                <div>
+                    <i class="fab fa-html5 text-orange-500 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">HTML5</p>
+                </div>
+                <div>
+                    <i class="fab fa-css3-alt text-blue-600 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">CSS3 / Tailwind / Bootstrap</p>
+                </div>
+                <div>
+                    <i class="fab fa-js text-yellow-500 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">JavaScript</p>
+                </div>
+                <div>
+                    <i class="fab fa-laravel text-red-600 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">Laravel</p>
+                </div>
+                <div>
+                    <i class="fas fa-database text-indigo-700 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">MySQL</p>
+                </div>
+                <div>
+                    <i class="fab fa-github text-gray-900 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">Git &amp; GitHub</p>
+                </div>
+                <div>
+                    <i class="fas fa-cloud text-blue-400 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">Cloud Hosting</p>
+                </div>
+                <div>
+                    <i class="fab fa-ubuntu text-orange-600 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">Linux / Kali WSL</p>
+                </div>
+                <div>
+                    <i class="fab fa-android text-green-600 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">Flutter</p>
+                </div>
+                <div>
+                    <i class="fab fa-react text-cyan-500 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">React Native</p>
+                </div>
+                <div>
+                    <i class="fas fa-mobile-alt text-purple-600 text-5xl mb-4"></i>
+                    <p class="font-semibold text-lg">CapacitorJS</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-24 px-6 bg-white section-animate max-w-7xl mx-auto rounded-lg shadow-md mt-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div
+                    class="bg-indigo-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <h3 class="text-2xl font-semibold mb-3">🎓 SESIS</h3>
+                    <p class="text-indigo-800">Secondary Education Student Information System – a Laravel-powered
+                        platform that handles student data, grades, discipline, and school fees.</p>
+                </div>
+                <div
+                    class="bg-indigo-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <h3 class="text-2xl font-semibold mb-3">🆔 ID Card Generator</h3>
+                    <p class="text-indigo-800">A batch student ID card system with PDF/PNG export, QR codes, and
+                        templates – used by multiple schools for fast ID printing.</p>
+                </div>
+                <div
+                    class="bg-indigo-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <h3 class="text-2xl font-semibold mb-3">📚 Neon Libre</h3>
+                    <p class="text-indigo-800">A multilingual e-library for Tanzanian students and teachers. Supports
+                        PDFs, ePubs, video lessons, and secure downloads.</p>
+                </div>
+                <div
+                    class="bg-indigo-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <h3 class="text-2xl font-semibold mb-3">🤖 LIBREQUE AI</h3>
+                    <p class="text-indigo-800">An AI-powered intelligent query system for digital libraries, designed to
+                        help users find books, notes, and videos using natural language queries.</p>
+                </div>
+                <div
+                    class="bg-indigo-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <h3 class="text-2xl font-semibold mb-3">🌐 School Portal</h3>
+                    <p class="text-indigo-800">A comprehensive school management system for student registration,
+                        attendance, grades, and communication between teachers and parents.</p>
+                </div>
+                <div
+                    class="bg-indigo-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <h3 class="text-2xl font-semibold mb-3">📱 NatLearn Mobile</h3>
+                    <p class="text-indigo-800">An Android app version of Neon Libre, built with Flutter, allowing
+                        students to read books, download notes, and play video lessons offline.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services"
+            class="py-24 px-6 bg-indigo-50 section-animate max-w-7xl mx-auto rounded-lg shadow-md mt-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">What I Offer</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center text-indigo-900">
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <i class="fas fa-code text-indigo-700 text-5xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Web Development</h3>
+                    <p>Custom web apps, dashboards, or systems built with Laravel, Tailwind, and Vue/JS.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <i class="fas fa-chalkboard-teacher text-indigo-700 text-5xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">EdTech Solutions</h3>
+                    <p>Systems tailored for schools, including ID card systems, e-libraries, and school portals.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <i class="fas fa-laptop-code text-indigo-700 text-5xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Mentorship &amp; Training</h3>
+                    <p>I offer guidance to beginners in programming, particularly in HTML, CSS, JavaScript, and Laravel.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="py-24 px-6 bg-white section-animate max-w-7xl mx-auto rounded-lg shadow-md mt-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">Latest Articles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <article
+                    class="bg-indigo-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <h3 class="text-2xl font-semibold mb-3">Building a Laravel + Tailwind Web App</h3>
+                    <p class="text-indigo-800">A step-by-step guide on how I built a student ID card generator using
+                        Laravel and Tailwind CSS.</p>
+                </article>
+                <article
+                    class="bg-indigo-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <h3 class="text-2xl font-semibold mb-3">Why Tanzanian Schools Need E-Libraries</h3>
+                    <p class="text-indigo-800">Insights on improving access to educational resources through digital
+                        libraries like Neon Libre.</p>
+                </article>
+                <article
+                    class="bg-indigo-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <h3 class="text-2xl font-semibold mb-3">Mastering Tailwind in 7 Days</h3>
+                    <p class="text-indigo-800">How I transitioned from plain CSS to Tailwind and became 3x faster at
+                        frontend development.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="mobile"
+            class="py-24 px-6 bg-indigo-50 section-animate max-w-5xl mx-auto rounded-lg shadow-md mt-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">Mobile Development</h2>
+            <div class="text-lg space-y-8 text-indigo-800">
+                <p>
+                    I'm actively developing cross-platform mobile apps using tools like **Flutter**,
+                    **React Native**, and **CapacitorJS**. My focus is on building
+                    educational, productivity, and utility apps tailored for Tanzanian learners and educators.
+                </p>
+                <p>
+                    Most apps integrate with existing Laravel backends, enabling seamless data sharing between web and
+                    mobile platforms. I aim to ensure offline functionality and low-data usage — critical for rural and
+                    remote areas.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-12">
+                <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition">
+                    <h3 class="font-semibold mb-2">Flutter</h3>
+                    <p>Rapid cross-platform native apps with beautiful UIs and great performance.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition">
+                    <h3 class="font-semibold mb-2">React Native</h3>
+                    <p>Leveraging React to build native mobile apps with reusable components.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-md hover:hover:shadow-lg transition">
+                    <h3 class="font-semibold mb-2">CapacitorJS</h3>
+                    <p>Wrap modern web apps as native mobile apps with native plugin support.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials"
+            class="py-24 px-6 bg-white section-animate max-w-4xl mx-auto rounded-lg shadow-md mt-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">Testimonials</h2>
+            <div class="space-y-8 text-indigo-800">
+                <blockquote class="bg-indigo-50 p-8 rounded-lg shadow-lg">
+                    <p class="italic text-lg">“Mr. Alchemy is an exceptional developer. His attention to detail and
+                        passion for education shines through every project.”</p>
+                    <footer class="mt-4 text-right font-semibold">— Jane Doe, School Admin</footer>
+                </blockquote>
+                <blockquote class="bg-indigo-50 p-8 rounded-lg shadow-lg">
+                    <p class="italic text-lg">“Thanks to his e-library system, our students have better access to
+                        textbooks and notes, increasing their performance significantly.”</p>
+                    <footer class="mt-4 text-right font-semibold">— John Mwanga, Teacher</footer>
+                </blockquote>
+            </div>
+        </section>
+
+        <section id="contact"
+            class="py-24 px-6 bg-indigo-50 section-animate max-w-4xl mx-auto rounded-lg shadow-md mt-20 mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">Contact Me</h2>
+            <div class="text-center mb-8">
+                <p class="mb-2 text-indigo-800 font-semibold">Feel free to reach out by email or social media!</p>
+                <a href="mailto:info.natlabs@gmail.com"
+                    class="inline-block bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-indigo-600 hover:shadow-lg transition duration-300 transform hover:-translate-y-0.5">
+                    Send an Email
+                </a>
+            </div>
+            <div class="flex justify-center space-x-8 text-indigo-700 text-4xl">
+                <a href="https://twitter.com/yourhandle" aria-label="Twitter" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-indigo-900 transition">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com/yourhandle" aria-label="GitHub" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-indigo-900 transition">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/yourhandle" aria-label="LinkedIn" target="_blank"
+                    rel="noopener noreferrer" class="hover:text-indigo-900 transition">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-indigo-900 text-white py-10 mt-20">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0 text-center md:text-left">
+                <h3 class="text-xl font-bold mb-2">Mr. Alchemy's Blog Portfolio</h3>
+                <p class="text-sm text-indigo-300">&copy; 2025 Mr. Alchemy. All rights reserved.</p>
+            </div>
+
+            <nav aria-label="Footer Navigation" class="mb-6 md:mb-0">
+                <ul class="flex flex-wrap justify-center md:justify-start gap-6 text-sm text-indigo-300">
+                    <li><a href="#home" class="hover:text-white transition">Home</a></li>
+                    <li><a href="#about" class="hover:text-white transition">About</a></li>
+                    <li><a href="#skills" class="hover:text-white transition">Skills</a></li>
+                    <li><a href="#projects" class="hover:text-white transition">Projects</a></li>
+                    <li><a href="#services" class="hover:text-white transition">Services</a></li>
+                    <li><a href="#blog" class="hover:text-white transition">Blog</a></li>
+                    <li><a href="#mobile" class="hover:text-white transition">Mobile</a></li>
+                    <li><a href="#testimonials" class="hover:text-white transition">Testimonials</a></li>
+                    <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="flex space-x-6 text-2xl">
+                <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer" aria-label="Twitter"
+                    class="hover:text-indigo-400 transition">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com/yourhandle" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+                    class="hover:text-indigo-400 transition">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/yourhandle" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn" class="hover:text-indigo-400 transition">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-chevron-up"></i></button>
+
+    <script>
+        // Toggle menu open/close
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuList = document.getElementById('main-menu-list');
+
+        menuToggle.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+            menuToggle.setAttribute('aria-expanded', !expanded);
+            menuToggle.classList.toggle('open');
+            if (menuList.classList.contains('visible')) {
+                menuList.classList.remove('visible');
+                menuList.classList.add('hidden');
+            } else {
+                menuList.classList.remove('hidden');
+                menuList.classList.add('visible');
+            }
+        });
+
+        // Close menu when clicking a menu item (mobile)
+        document.querySelectorAll('#main-menu-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) { // md breakpoint is 768px in Tailwind
+                    menuToggle.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', false);
+                    menuList.classList.remove('visible');
+                    menuList.classList.add('hidden');
+                }
+            });
+        });
+
+        // **Removed header scroll background + shadow toggle**
+        // The header is now always solid, so this script is no longer needed.
+        // const header = document.querySelector('header');
+        // window.addEventListener('scroll', () => {
+        //     if (window.scrollY > 50) {
+        //         header.classList.add('scrolled');
+        //     } else {
+        //         header.classList.remove('scrolled');
+        //     }
+        // });
+
+        // Section fade-in on scroll
+        const sections = document.querySelectorAll('.section-animate');
+        const observerOptions = {
+            root: null,
+            threshold: 0.1,
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, observerOptions);
+        sections.forEach(section => observer.observe(section));
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>
